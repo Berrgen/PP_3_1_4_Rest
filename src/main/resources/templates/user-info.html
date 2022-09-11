@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+</head>
+
+<body>
+<h1>Users info</h1>
+<table border="1">
+    <tr>
+        <th>email</th>
+        <th>password</th>
+        <th>firstname</th>
+        <th>lastname</th>
+        <th>age</th>
+    </tr>
+    <tr th:each="user: ${userList}">
+        <td th:utext="${user.getEmail()}"></td>
+        <td th:utext="${user.getPassword()}"></td>
+        <td th:utext="${user.getFirstName()}"></td>
+        <td th:utext="${user.getLastName()}"></td>
+        <td th:utext="${user.getAge()}"></td>
+    </tr>
+
+    <br/>
+        <p><a href="/login">Logout</a></p>
+    <br/>
+
+</body>
+</html>

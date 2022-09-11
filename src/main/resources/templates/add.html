@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<br/>
+<form action="#" th:method="POST" th:action="@{/admin/add}" th:object="${user}" id="id">
+  <input type = "text" th:name = "email"
+         placeholder="Write your email"/>
+
+  <br>
+  <input type = "text" th:name = "password"
+         placeholder="Write your password"/>
+
+  <br>
+  <input type = "text" th:name = "firstname"
+         placeholder="Write your firstname"/>
+  <br>
+  <input type = "text" th:name = "lastname"
+         placeholder="Write your lastname"/>
+  <br>
+  <input type = "text" th:name = "age"
+         placeholder="Write your age"/>
+
+  <input type = "submit"/>
+</form>
+<br/>
+</body>
+</html>
