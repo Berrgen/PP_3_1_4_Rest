@@ -24,7 +24,7 @@ public class AdminController {
     @GetMapping(value = "")
     public ModelAndView showAllUsers() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin");
+        modelAndView.setViewName("admin/admin-page");
         modelAndView.addObject("userList", userService.getAllUsers());
         return modelAndView;
     }
@@ -34,7 +34,7 @@ public class AdminController {
     public ModelAndView editUser(@PathVariable(name = "id")long id, @ModelAttribute("user") User user) {
         user = userService.getUserById(id);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("edit");
+        modelAndView.setViewName("admin/edit-user");
         modelAndView.addObject("user", user);
         return modelAndView;
     }
@@ -58,7 +58,7 @@ public class AdminController {
     @GetMapping("/add")
     public String createUserHtml(Model model) {
         model.addAttribute("user", new User());
-        return "add";
+        return "admin/add-user";
     }
 
     @PostMapping(value = "/add")

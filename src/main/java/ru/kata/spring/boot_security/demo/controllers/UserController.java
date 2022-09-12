@@ -19,7 +19,7 @@ public class UserController {
     @GetMapping(value = "")
     public ModelAndView showAllUsers() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("user-info");
+        modelAndView.setViewName("user/user-info");
         modelAndView.addObject("userList", userService.getAllUsers());
         return modelAndView;
     }

@@ -54,7 +54,7 @@ public class UserServiceTests {
         Role roleUser = roleRepo.findByName("Admin");
 
         User user = new User();
-        user.setEmail("sergej@gmail.com");
+        user.setEmail("serge@gmail.com");
         user.setPassword("123");
         user.setFirstName("Sergej");
         user.setLastName("Slyckiy");
