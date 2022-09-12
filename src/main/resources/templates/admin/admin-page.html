@@ -10,7 +10,6 @@
     <th>password</th>
     <th>firstname</th>
     <th>lastname</th>
-    <th>age</th>
     <th>roles</th>
   </tr>
   <tr th:each="User: ${userList}">
@@ -18,7 +17,6 @@
     <td th:utext="${User.getPassword()}"></td>
     <td th:utext="${User.getFirstName()}"></td>
     <td th:utext="${User.getLastName()}"></td>
-    <td th:utext="${User.getAge()}"></td>
     <td th:utext="${User.getRoles()}"></td>
 
     <td>

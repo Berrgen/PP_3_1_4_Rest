@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -11,28 +12,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import ru.kata.spring.boot_security.demo.repository.UserRepository;
-import ru.kata.spring.boot_security.demo.services.CustomUserDetailsService;
-
-
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final DataSource dataSource;
     private final SuccessUserHandler successUserHandler;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    public WebSecurityConfig(DataSource dataSource, SuccessUserHandler successUserHandler) {
-        this.dataSource = dataSource;
+    public WebSecurityConfig(@Qualifier("customUserDetailsService") UserDetailsService userDetailsService,
+                             SuccessUserHandler successUserHandler) {
+        this.userDetailsService = userDetailsService;
         this.successUserHandler = successUserHandler;
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService();
     }
 
     @Bean
@@ -43,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;
@@ -57,15 +48,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                    .antMatchers("/").authenticated()
-                    .antMatchers("/admin", "/admin/**").hasAuthority("Admin")
-                    .antMatchers("/user").hasAnyAuthority("Admin", "User")
-                    .anyRequest().authenticated()
+                .antMatchers("/").authenticated()
+                .antMatchers("/admin", "/admin/**").hasAuthority("Admin")
+                .antMatchers("/user").hasAnyAuthority("Admin", "User")
+                .anyRequest().authenticated()
                 .and()
-                    .formLogin().successHandler(successUserHandler)
-                    .permitAll()
+                .formLogin().successHandler(successUserHandler)
+                .permitAll()
                 .and()
-                    .logout().logoutSuccessUrl("/user").permitAll();
+                .logout().logoutSuccessUrl("/user").permitAll();
     }
 
 }

@@ -16,10 +16,6 @@
     <input type="text" th:field="*{lastName}" id="lastName"/>
 
     <br>
-    <label for="age">age: </label>
-    <input type="text" th:field="*{age}" id="age"/>
-
-    <br>
     <label for="email">email: </label>
     <input type="text" th:field="*{email}" id="email"/>
 
@@ -27,6 +23,16 @@
     <label for="password">password: </label>
     <input type="text" th:field="*{password}" id="password"/>
 
+    <br>
+
+    <label>Role:
+        <select size="2" multiple name="roles" required="required">
+            <option selected="selected" value="1">User</option>
+            <option value="2">Admin</option>
+        </select>
+    </label>
+
+    <br>
     <input type = "submit" value="Update"/>
 </form>
 </body>

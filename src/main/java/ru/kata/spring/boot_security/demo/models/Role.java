@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.models;
 
-
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -70,4 +69,5 @@ public class Role implements GrantedAuthority {
     public String getAuthority() {
         return getName();
     }
+
 }

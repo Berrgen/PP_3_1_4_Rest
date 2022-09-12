@@ -8,8 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
-
-
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
@@ -56,7 +54,7 @@ public class AdminController {
     }
 
     @GetMapping("/add")
-    public String createUserHtml(Model model) {
+    public String addView(Model model) {
         model.addAttribute("user", new User());
         return "admin/add-user";
     }
@@ -64,10 +62,9 @@ public class AdminController {
     @PostMapping(value = "/add")
     public ModelAndView addUser(@ModelAttribute(name = "firstname") String firstname,
                                 @ModelAttribute(name = "lastname")String lastname,
-                                @ModelAttribute(name = "age") byte age,
                                 @ModelAttribute(name = "email") String email,
                                 @ModelAttribute(name = "password") String password) {
-        userService.saveUserWithDefaultRole(new User(firstname, lastname, age, email, password));
+        userService.saveUserWithDefaultRole(new User(firstname, lastname, email, password));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/admin");
         return modelAndView;
