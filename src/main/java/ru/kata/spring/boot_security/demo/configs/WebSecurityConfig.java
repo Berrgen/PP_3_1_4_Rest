@@ -20,7 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public WebSecurityConfig(@Qualifier("customUserDetailsService") UserDetailsService userDetailsService,
+    public WebSecurityConfig(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService,
                              SuccessUserHandler successUserHandler) {
         this.userDetailsService = userDetailsService;
         this.successUserHandler = successUserHandler;
@@ -47,16 +47,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/").authenticated()
-                .antMatchers("/admin", "/admin/**").hasAuthority("Admin")
-                .antMatchers("/user").hasAnyAuthority("Admin", "User")
-                .anyRequest().authenticated()
+
+        http.csrf().disable()
+                .authorizeRequests()
+                    .antMatchers("/login").permitAll()
+                    .antMatchers("/").authenticated()
+                    .antMatchers("/admin", "/admin/**").hasAuthority("ADMIN")
+                    .antMatchers("/user").hasAnyAuthority("ADMIN", "USER")
+                    .anyRequest().authenticated()
                 .and()
-                .formLogin().successHandler(successUserHandler)
-                .permitAll()
+                    .formLogin() //вкл форму логина
+                    .loginPage("/login") // мапинг логина
+                    .successHandler(successUserHandler)
+                    .permitAll() //доступен всем
                 .and()
-                .logout().logoutSuccessUrl("/user").permitAll();
+                    .logout()
+                    .logoutSuccessUrl("/login")
+                    .permitAll();
     }
 
 }

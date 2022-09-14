@@ -22,8 +22,8 @@ public class RoleRepositoryTests {
 
     @Test
     public void testCreateRoles() {
-        Role user = new Role("User");
-        Role admin = new Role("Admin");
+        Role user = new Role("USER");
+        Role admin = new Role("ADMIN");
 
         repo.saveAll(List.of(user, admin));
 

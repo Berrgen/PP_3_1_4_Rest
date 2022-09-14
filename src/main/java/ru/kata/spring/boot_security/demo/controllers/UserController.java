@@ -1,26 +1,30 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import ru.kata.spring.boot_security.demo.services.UserService;
+import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.repository.UserRepository;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    @Autowired
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    @GetMapping(value = "")
-    public ModelAndView showAllUsers() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("user/user-info");
-        modelAndView.addObject("userList", userService.getAllUsers());
-        return modelAndView;
+    @GetMapping("")
+    public String showUserInfo(User user, Model model, Principal principal) {
+        user = userRepository.findByEmail(principal.getName());
+        model.addAttribute("user", user);
+        return "/user/user-info";
     }
 }

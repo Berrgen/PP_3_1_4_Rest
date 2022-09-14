@@ -51,13 +51,13 @@ public class UserServiceTests {
 
     @Test
     public void testAddRoleToNewUser() {
-        Role roleUser = roleRepo.findByName("Admin");
+        Role roleUser = roleRepo.findByName("USER");
 
         User user = new User();
-        user.setEmail("serge@gmail.com");
-        user.setPassword("123");
-        user.setFirstName("Sergej");
-        user.setLastName("Slyckiy");
+        user.setEmail("userAdmin@mail.ru");
+        user.setPassword("userAdmin");
+        user.setFirstName("userAdmin");
+        user.setLastName("userAdmin");
         user.setAge((byte) 25);
         user.addRole(roleUser);
 
@@ -68,12 +68,12 @@ public class UserServiceTests {
 
     @Test
     public void testAddRoleToExistingUser() {
-        User user = userRepo.findById(1L).get();
+        User user = userRepo.findById(3L).get();
 
-        Role roleUser = roleRepo.findByName("User");
-        Role roleAdmin = new Role(2L);
-
+        Role roleUser = roleRepo.findByName("ADMIN");
         user.addRole(roleUser);
+
+        Role roleAdmin = new Role(2L);
         user.addRole(roleAdmin);
 
         User savedUser = userRepo.save(user);

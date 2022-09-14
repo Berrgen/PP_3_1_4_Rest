@@ -1,14 +1,10 @@
 package ru.kata.spring.boot_security.demo.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
-import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
-
 
 import java.util.List;
 
@@ -16,24 +12,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepo;
-    private final RoleRepository roleRepo;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepo,
-                           RoleRepository roleRepo) {
+    public UserServiceImpl(UserRepository userRepo) {
         this.userRepo = userRepo;
-        this.roleRepo = roleRepo;
-    }
-
-    public void saveUserWithDefaultRole(User user) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodePassword = encoder.encode(user.getPassword());
-        user.setPassword(encodePassword);
-
-        Role roleUser = roleRepo.findByName("User");
-        user.addRole(roleUser);
-
-        userRepo.save(user);
     }
 
     @Override
@@ -60,6 +42,7 @@ public class UserServiceImpl implements UserService {
         userUpdated.setFirstName(user.getFirstName());
         userUpdated.setLastName(user.getLastName());
         userUpdated.setEmail(user.getEmail());
+        userUpdated.setAge(user.getAge());
         userUpdated.setPassword(user.getPassword());
         userUpdated.setRoles(user.getRoles());
         userRepo.flush();
@@ -68,6 +51,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(long id) {
         return userRepo.getById(id);
+    }
+
+    public User getByUserName(String email) {
+        return userRepo.findByEmail(email);
     }
 
 }

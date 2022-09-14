@@ -1,13 +1,11 @@
 package ru.kata.spring.boot_security.demo.models;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Table(name = "roles")
-public class Role implements GrantedAuthority {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,11 +61,6 @@ public class Role implements GrantedAuthority {
 
     public void setUsers(Collection<User> users) {
         this.users = users;
-    }
-
-    @Override
-    public String getAuthority() {
-        return getName();
     }
 
 }

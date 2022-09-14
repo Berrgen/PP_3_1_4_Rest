@@ -1,27 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.w3.org/1999/xhtml" >
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <title>Add User</title>
 </head>
 <body>
-<br/>
-<form action="#" th:method="POST" th:action="@{/admin/add}" th:object="${user}" id="id">
-  <input type = "text" th:name = "email"
-         placeholder="Write your email"/>
+<div class="modal-body">
+  <form th:action="#" th:action="@{/admin/add}" th:object="${user}" th:method="post">
+    <div class="form-group text-center">
 
-  <br>
-  <input type = "text" th:name = "password"
-         placeholder="Write your password"/>
+      <div>
+        <label for="firstName">First name</label>
+        <input type="text" id="firstName" name="firstName">
+      </div>
+      <div>
+        <label for="lastName">Last name</label>
+        <input type="text" id="lastName" name="lastName">
+      </div>
+      <div>
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age">
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email">
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="text" id="password" name="password">
+      </div>
+      <div>
+        <label for="role">Role</label>
+        <select multiple class="form-control" id="role" name="role">
+          <option value="admin">ADMIN</option>
+          <option value="user">USER</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit">Add user</button>
+  </form>
+</div>
 
-  <br>
-  <input type = "text" th:name = "firstname"
-         placeholder="Write your firstname"/>
-  <br>
-  <input type = "text" th:name = "lastname"
-         placeholder="Write your lastname"/>
-  <br>
-
-  <input type = "submit"/>
-</form>
-<br/>
+<a th:href="'/admin/admin-page'" >Admin page</a><br>
+<a th:href="'/logout'" >Logout</a><br>
 </body>
 </html>
