@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>User</title>
-</head>
 
+    <title>Title</title>
+</head>
+<body>
 
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3" href="#" >
-        <b th:utext="${user.getEmail()}"></b>
+        <b id="userEmail"></b>
         <lable>with roles:</lable>
-        <lable th:text = "${user.getRolesName()}"></lable>
+        <lable id="roleUser" ></lable>
     </a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-nav">
@@ -51,41 +56,35 @@
 
         <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4 bg-light">
             <div class="display-4">User information-page</div>
-            <div class="card "></div>
-            <div class="card-header">
-                <div>About user</div>
-            </div>
-            <div class="card-body">
-                <div class="tab-content" id="myTabContent">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Age</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Role</th>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td th:text="${user.id}"></td>
-                            <td th:text="${user.firstName}"></td>
-                            <td th:text="${user.lastName}"></td>
-                            <td th:text="${user.age}"></td>
-                            <td th:text="${user.email}"></td>
-                            <td th:text="${user.getRolesName()}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
+            <div class="card ">
+                <div class="card-header">
+                    <div>About user</div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">firstName</th>
+                                <th scope="col">lastName</th>
+                                <th scope="col">age</th>
+                                <th scope="col">e-mail</th>
+                                <th scope="col">roles</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tableBody">
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
         </main>
     </div>
 </div>
 
-</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <script src="https://code.jquery.com/jquery-3.5.0.js"
@@ -100,5 +99,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="./header.js"></script>
+<script type="text/javascript" src="./userTable.js"></script>
 </body>
 </html>

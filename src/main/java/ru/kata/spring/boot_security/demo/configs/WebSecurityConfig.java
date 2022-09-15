@@ -56,10 +56,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/user").hasAnyAuthority("ADMIN", "USER")
                     .anyRequest().authenticated()
                 .and()
-                    .formLogin() //вкл форму логина
-                    .loginPage("/login") // мапинг логина
+                    .formLogin()
+                    .loginPage("/login")
                     .successHandler(successUserHandler)
-                    .permitAll() //доступен всем
+                    .permitAll()
                 .and()
                     .logout()
                     .logoutSuccessUrl("/login")

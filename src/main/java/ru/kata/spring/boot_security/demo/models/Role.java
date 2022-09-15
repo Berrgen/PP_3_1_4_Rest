@@ -1,10 +1,9 @@
 package ru.kata.spring.boot_security.demo.models;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 public class Role {
 
     @Id
@@ -31,9 +30,6 @@ public class Role {
         this.name = name;
     }
 
-    @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
-
     @Override
     public String toString() {
         return this.name;
@@ -53,14 +49,6 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Collection<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Collection<User> users) {
-        this.users = users;
     }
 
 }
