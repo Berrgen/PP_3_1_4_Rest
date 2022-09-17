@@ -12,5 +12,7 @@ public interface UserService {
     void editUser(User user);
     User getUserById(long id);
     User getByUserName(String mail);
+    User updateUserPutMap (User user);
+    User addUserPostMap (User user);
 
 }
