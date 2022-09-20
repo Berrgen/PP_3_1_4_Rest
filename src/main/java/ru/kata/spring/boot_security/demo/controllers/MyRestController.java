@@ -13,24 +13,15 @@ import java.util.List;
 @RequestMapping("/api")
 public class MyRestController {
 
-//    private final PasswordEncoder passwordEncoder;
     private final UserService userService;
-//    private final RoleService roleService;
-//    private final UserRepository userRepository;
 
     @Autowired
-    public MyRestController(/*PasswordEncoder passwordEncoder,*/
-                            UserService userService/*,*/
-                            /*RoleService roleService, UserRepository userRepository*/) {
-//        this.passwordEncoder = passwordEncoder;
+    public MyRestController(UserService userService) {
         this.userService = userService;
-//        this.roleService = roleService;
-//        this.userRepository = userRepository;
     }
 
     @GetMapping ("/about")
     public User getCurrentUser(Principal principal){
-//        return userRepository.findByEmail(principal.getName());
         return userService.getByUserName(principal.getName());
     }
 
